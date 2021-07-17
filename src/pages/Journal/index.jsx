@@ -1,10 +1,15 @@
 import React from 'react'
+import LateralMenu from 'components/LateralMenu'
+import EntryForm from 'components/EntryForm'
+
+import { JournalContainer } from './styles'
 
 const JournalPage = () => {
   return (
-    <div>
-      <h1>Journal page</h1>
-    </div>
+    <JournalContainer>
+      <LateralMenu />
+      <EntryForm />
+    </JournalContainer>
   )
 }
 
