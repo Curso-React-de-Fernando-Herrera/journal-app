@@ -1,11 +1,14 @@
 import React from 'react'
+import { Provider } from 'react-redux';
 import AppRoute from 'routes/AppRoute';
+
+import { store } from 'store/store'
 
 function App() {
   return (
-    <div className="App">
-    <AppRoute />
-    </div>
+    <Provider store={ store }>
+      <AppRoute />
+    </Provider>
   );
 }
 

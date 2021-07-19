@@ -1,5 +1,8 @@
 import { useForm } from 'hooks/useForm'
+import { useDispatch } from 'react-redux'
 import GoogleLogin from 'components/GoogleLogin'
+
+import { login } from 'actions/login'
 
 import {
   PageContainer,
@@ -11,6 +14,7 @@ import {
 } from './styles'
 
 const Register = () => {
+  const dispatch = useDispatch()
 
   const initialStates = {
     name: "",
@@ -22,6 +26,7 @@ const Register = () => {
 
   const handleRegister = e => {
     e.preventDefault()
+    dispatch( login({ displayName: 'Mateo Alvarez', uid: 1234 }) )
   }
 
   return (
