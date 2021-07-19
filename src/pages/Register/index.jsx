@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux'
 import { useForm } from 'hooks/useForm'
+
+import { register } from 'actions/register'
 
 import {
   PageContainer,
@@ -10,6 +13,7 @@ import {
 } from './styles'
 
 const Register = () => {
+  const dispatch = useDispatch()
 
   const initialStates = {
     name: "",
@@ -23,6 +27,7 @@ const Register = () => {
 
   const handleRegister = e => {
     e.preventDefault()
+    dispatch( register({ name, email, password, secondPassword }) )
   }
 
   return (
