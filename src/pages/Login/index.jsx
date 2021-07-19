@@ -2,7 +2,7 @@ import { useForm } from 'hooks/useForm'
 import { useDispatch } from 'react-redux'
 import GoogleLogin from 'components/GoogleLogin'
 
-import { login } from 'actions/login'
+import { startLogin } from 'actions/login'
 
 import {
   PageContainer,
@@ -26,7 +26,7 @@ const Register = () => {
 
   const handleRegister = e => {
     e.preventDefault()
-    dispatch( login({ displayName: 'Mateo Alvarez', uid: 1234 }) )
+    dispatch( startLogin({ displayName: 'Mateo Alvarez', uid: 1234 }) )
   }
 
   return (
