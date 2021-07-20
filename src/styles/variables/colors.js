@@ -5,4 +5,6 @@ export const colors = {
   shadow: 'var(--shadow)',
   lightTransparent: 'var(--white-transparent)',
   gradient: 'var(--gradient)',
+
+  error: '#f8d7da',
 }

@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'hooks/useForm'
 
-import { register } from 'actions/register'
+import SmallError from 'components/SmallError'
+import { checkDataRegister, registerWithEmailPassword } from 'actions/register'
 
 import {
   PageContainer,
@@ -12,28 +13,34 @@ import {
   Link
 } from './styles'
 
+const initialStates = {
+  name: "",
+  email: "",
+  password: "" ,
+  secondPassword: "" 
+}
+
 const Register = () => {
   const dispatch = useDispatch()
-
-  const initialStates = {
-    name: "",
-    email: "",
-    password: "" ,
-    secondPassword: "" 
-  }
+  const { msgError } = useSelector(state => state.errorUI)
 
   const { handleInputChange, inputStates } = useForm(initialStates)
   const { name, email, password, secondPassword } = inputStates
 
   const handleRegister = e => {
     e.preventDefault()
-    dispatch( register({ name, email, password, secondPassword }) )
+    const { payload: _msjError } = dispatch( checkDataRegister({ name, email, password, secondPassword }) )
+
+    _msjError === null && dispatch( registerWithEmailPassword({ name, email, password }) )
   }
 
   return (
     <PageContainer>
       <ModalRegister>
         <Title>Registrarse</Title>
+        {
+          msgError && <SmallError>{ msgError }</SmallError>
+        }
         <form onSubmit={ handleRegister }>
           <InputForm
             autoComplete="off"

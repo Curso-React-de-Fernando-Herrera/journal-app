@@ -15,7 +15,7 @@ export const errorReducer = (state = initialState, action) => {
     case errorTypes.uiRemoveError:
       return {
         ...state,
-        msgError: action.payload
+        msgError: null
       }
 
     default:
