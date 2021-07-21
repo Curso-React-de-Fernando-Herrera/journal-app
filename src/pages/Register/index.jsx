@@ -6,9 +6,10 @@ import { useButtonDisabled } from 'hooks/useButtonDisabled'
 import SmallError from 'components/SmallError'
 
 import { registerWithEmailPassword } from 'actions/register'
-import { checkDataRegister } from 'actions/uiErrors'
+import { checkDataRegister, removeErrors } from 'actions/uiErrors'
 
 import { PageContainer, ModalRegister, Title, InputForm, ButtonRegister, Link } from './styles'
+import { useEffect } from 'react'
 
 const initialStates = {
   name: "",
@@ -25,6 +26,12 @@ const Register = () => {
 
   const { handleInputChange, inputStates } = useForm(initialStates)
   const { name, email, password, secondPassword } = inputStates
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeErrors())
+    }
+  }, [dispatch])
 
   const handleRegister = async (e) => {
     e.preventDefault()

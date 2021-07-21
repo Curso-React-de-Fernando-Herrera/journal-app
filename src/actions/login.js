@@ -1,5 +1,6 @@
 import { firebase, googleAuthProvider } from 'firebase/config'
 import { authTypes } from 'types/authTypes'
+import { handleLoginErrors } from './uiErrors'
 
 export const startLogin = ({ email, password }) => {
   return async (dispatch) => {
@@ -9,9 +10,13 @@ export const startLogin = ({ email, password }) => {
       .then(({ user: { uid, displayName } }) => {
         dispatch(login({ uid, displayName }))
       })
-      .catch((err) => {
-        console.log(err.code)
-        console.log(err.message)
+      .catch(() => {
+        dispatch(
+          handleLoginErrors({
+            errorName:
+              'La contraseña no es válida o el usuario no tiene contraseña',
+          })
+        )
       })
   }
 }

@@ -9,6 +9,8 @@ import SmallError from 'components/SmallError'
 import { startLogin } from 'actions/login'
 
 import { PageContainer, ModalRegister, Title, InputForm, ButtonRegister, Link } from './styles'
+import { useEffect } from 'react'
+import { removeErrors } from 'actions/uiErrors'
 
 const Register = () => {
 
@@ -23,42 +25,48 @@ const Register = () => {
 
   const { email, password } = inputStates
 
-  const handleRegister =  async (e) => {
+  useEffect(() => {
+    return () => {
+      dispatch(removeErrors())
+    }
+  }, [dispatch])
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     handleDisabled()
-    dispatch( startLogin({ email, password }) )
-      .then( () => handleRemoveDisabled())
-      .catch( () => handleRemoveDisabled())
+    dispatch(startLogin({ email, password }))
+      .then(() => handleRemoveDisabled())
+      .catch(() => handleRemoveDisabled())
   }
-  
+
 
   return (
     <PageContainer>
       <ModalRegister>
         <Title>Login</Title>
         {
-          msgError && <SmallError>{ msgError }</SmallError>
+          msgError && <SmallError>{msgError}</SmallError>
         }
-        <form onSubmit={ handleRegister }>
+        <form onSubmit={handleRegister}>
 
           <InputForm
             autoComplete="off"
             name="email"
-            onChange={ handleInputChange }
+            onChange={handleInputChange}
             placeholder="email"
             type="text"
-            value={ email } 
+            value={email}
           />
           <InputForm
             autoComplete="off"
             name="password"
-            onChange={ handleInputChange }
+            onChange={handleInputChange}
             placeholder="contraseña"
             type="password"
-            value={ password }
+            value={password}
           />
 
-          <ButtonRegister disabled= { isDisabled }>Entrar a la cuenta</ButtonRegister>
+          <ButtonRegister disabled={isDisabled}>Entrar a la cuenta</ButtonRegister>
         </form>
         <GoogleLogin />
         <Link to="/auth/register">No tienes una cuenta?</Link>
