@@ -1,15 +1,18 @@
 import React from 'react'
-import { firebase } from 'firebase/config'
+import { useDispatch } from 'react-redux'
+import { logout } from 'actions/logout'
+
 import { Button } from './styles'
 
 const LoginButton = () => {
+  const dispatch = useDispatch()
 
   const handleLogout = () => {
-    firebase.auth().signOut()
+    dispatch(logout())
   }
 
   return (
-    <Button onClick={handleLogout}>Login/Logout</Button>
+    <Button onClick={handleLogout}>Cerrar sesion</Button>
   )
 }
 
