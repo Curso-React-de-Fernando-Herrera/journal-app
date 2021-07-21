@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from 'actions/logout'
+import { startLogout } from 'actions/logout'
 
 import { Button } from './styles'
 
@@ -8,7 +8,7 @@ const LoginButton = () => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(logout())
+    dispatch(startLogout())
   }
 
   return (
