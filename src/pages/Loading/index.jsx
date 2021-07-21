@@ -1,9 +1,10 @@
+import { Container, Spinner } from './styles'
 
 const LoadingPage = () => {
   return (
-    <section>
-      <h1>Loading</h1>
-    </section>
+    <Container>
+      <Spinner></Spinner>
+    </Container>
   )
 }
 
