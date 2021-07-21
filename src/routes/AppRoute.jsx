@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Router, Route, Switch, Redirect } from 'wouter'
+import { Router, Switch, Redirect } from 'wouter'
 import { useDispatch } from 'react-redux'
-
 import { firebase } from 'firebase/config'
+
 import { login } from 'actions/login'
 
-import JournalRoute from 'pages/Journal'
-import AuthRouter from 'routes/AuthRouter'
+import { PrivateRoute } from 'routes/PrivateRoute'
+import { PublicRoute } from 'routes/PublicRoute'
 import LoadingPage from 'pages/Loading'
 
 const AppRoute = () => {
@@ -16,14 +16,21 @@ const AppRoute = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+
     firebase.auth().onAuthStateChanged((user) => {
+      setIsAuth(false)
+
       if (user?.uid) {
         const { uid, displayName } = user
+
         dispatch(login({ uid, displayName }))
         setIsAuth(true)
       }
+
       setIsLoading(false)
+
     })
+
   }, [dispatch])
 
   if (isLoading) return <LoadingPage />
@@ -33,16 +40,8 @@ const AppRoute = () => {
       <Switch>
         {
           isAuth
-            ?
-            <Route
-              path="/"
-              component={JournalRoute}
-            />
-            :
-            <Route
-              path="/auth/:auth?"
-              component={AuthRouter}
-            />
+            ? <PrivateRoute />
+            : <PublicRoute />
         }
         <Redirect to="/" />
       </Switch>

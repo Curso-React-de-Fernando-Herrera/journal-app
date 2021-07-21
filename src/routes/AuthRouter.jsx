@@ -5,15 +5,16 @@ import Login from 'pages/Login'
 import Register from 'pages/Register'
 
 const AuthRouter = () => {
+
   return (
     <Switch>
       <Route
         path="/auth/login"
-        component={ Login }
+        component={Login}
       />
       <Route
         path="/auth/register"
-        component={ Register }
+        component={Register}
       />
       <Redirect to="/auth/register" />
     </Switch>
