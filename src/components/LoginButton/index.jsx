@@ -1,9 +1,15 @@
 import React from 'react'
+import { firebase } from 'firebase/config'
 import { Button } from './styles'
 
 const LoginButton = () => {
+
+  const handleLogout = () => {
+    firebase.auth().signOut()
+  }
+
   return (
-    <Button>Login/Logout</Button>
+    <Button onClick={handleLogout}>Login/Logout</Button>
   )
 }
 

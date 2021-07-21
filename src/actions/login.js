@@ -1,28 +1,37 @@
 import { firebase, googleAuthProvider } from 'firebase/config'
 import { authTypes } from 'types/authTypes'
 
-export const startLogin = ({ uid, displayName }) => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch( login({ uid, displayName }) )
-    }, 3500);
+export const startLogin = ({ email, password }) => {
+  return async (dispatch) => {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(({ user: { uid, displayName } }) => {
+        dispatch(login({ uid, displayName }))
+      })
+      .catch((err) => {
+        console.log(err.code)
+        console.log(err.message)
+      })
   }
 }
 
 export const startLoginWithGoogle = () => {
-  return dispatch => {
-    firebase.auth().signInWithPopup( googleAuthProvider )
+  return (dispatch) => {
+    firebase
+      .auth()
+      .signInWithPopup(googleAuthProvider)
       .then(({ user: { uid, displayName } }) => {
-        dispatch( login({ uid, displayName }) )
+        dispatch(login({ uid, displayName }))
       })
       .catch(console.log)
   }
 }
 
-const login = ({ uid, displayName }) => ({
+export const login = ({ uid, displayName }) => ({
   type: authTypes.login,
   payload: {
     uid,
-    displayName
-  }
+    displayName,
+  },
 })

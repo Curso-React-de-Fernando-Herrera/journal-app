@@ -1,38 +1,44 @@
+import { useDispatch, useSelector } from 'react-redux'
+
 import { useForm } from 'hooks/useForm'
-import { useDispatch } from 'react-redux'
+import { useButtonDisabled } from 'hooks/useButtonDisabled'
+
 import GoogleLogin from 'components/GoogleLogin'
+import SmallError from 'components/SmallError'
 
 import { startLogin } from 'actions/login'
 
-import {
-  PageContainer,
-  ModalRegister,
-  Title,
-  InputForm,
-  ButtonRegister,
-  Link
-} from './styles'
+import { PageContainer, ModalRegister, Title, InputForm, ButtonRegister, Link } from './styles'
 
 const Register = () => {
+
   const dispatch = useDispatch()
+  const { msgError } = useSelector(state => state.errorUI)
 
-  const initialStates = {
+  const { isDisabled, handleDisabled, handleRemoveDisabled } = useButtonDisabled()
+  const { handleInputChange, inputStates } = useForm({
     name: "",
-    email: "",
-  }
+    email: ""
+  })
 
-  const { handleInputChange, inputStates } = useForm(initialStates)
   const { email, password } = inputStates
 
-  const handleRegister = e => {
-    e.preventDefault()
-    dispatch( startLogin({ displayName: 'Mateo Alvarez', uid: 1234 }) )
+  const handleRegister =  async (e) => {
+    e.preventDefault();
+    handleDisabled()
+    dispatch( startLogin({ email, password }) )
+      .then( () => handleRemoveDisabled())
+      .catch( () => handleRemoveDisabled())
   }
+  
 
   return (
     <PageContainer>
       <ModalRegister>
         <Title>Login</Title>
+        {
+          msgError && <SmallError>{ msgError }</SmallError>
+        }
         <form onSubmit={ handleRegister }>
 
           <InputForm
@@ -52,7 +58,7 @@ const Register = () => {
             value={ password }
           />
 
-          <ButtonRegister>Registrarse</ButtonRegister>
+          <ButtonRegister disabled= { isDisabled }>Entrar a la cuenta</ButtonRegister>
         </form>
         <GoogleLogin />
         <Link to="/auth/register">No tienes una cuenta?</Link>

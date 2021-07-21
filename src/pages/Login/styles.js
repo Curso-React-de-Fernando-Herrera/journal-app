@@ -66,6 +66,11 @@ export const ButtonRegister = styled.button`
   :active {
     box-shadow: 0 0 8px ${ colors.shadow };
   }
+
+  :disabled {
+    cursor: not-allowed;
+    filter: contrast(0.5);
+  }
 `
 
 export const Link = styled(LinkStyled)`
