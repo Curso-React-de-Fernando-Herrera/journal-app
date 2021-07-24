@@ -8,6 +8,7 @@ import { login } from 'actions/login'
 import { PrivateRoute } from 'routes/PrivateRoute'
 import { PublicRoute } from 'routes/PublicRoute'
 import LoadingPage from 'pages/Loading'
+import { startLoadingNotes } from 'actions/journal'
 
 const AppRoute = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -17,7 +18,7 @@ const AppRoute = () => {
 
   useEffect(() => {
 
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       setIsAuth(false)
 
       if (user?.uid) {
@@ -25,6 +26,8 @@ const AppRoute = () => {
 
         dispatch(login({ uid, displayName }))
         setIsAuth(true)
+
+        dispatch(startLoadingNotes(uid))
       }
 
       setIsLoading(false)
