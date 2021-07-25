@@ -2,14 +2,13 @@ import { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 
 export const useForm = (initialStates = {}) => {
-
-  const [inputStates, setstate] = useState(initialStates)
+  const [inputStates, setState] = useState(initialStates)
 
   const handleInputChange = useCallback((e) => {
 
     const { name, value } = e.target
 
-    setstate((lastState) => {
+    setState((lastState) => {
 
       return {
         ...lastState,
@@ -17,12 +16,17 @@ export const useForm = (initialStates = {}) => {
       }
 
     })
-    
+
   }, [])
+
+  const handleReset = useCallback((state = initialStates) => {
+    setState(state)
+  }, [initialStates])
 
   return {
     handleInputChange,
-    inputStates
+    inputStates,
+    handleReset
   }
 }
 

@@ -15,7 +15,7 @@ const JournalPage = () => {
       <LateralMenu />
       {
         active
-          ? <EntryForm />
+          ? <EntryForm content={active} />
           : <JournalNotSelect />
       }
     </JournalContainer>

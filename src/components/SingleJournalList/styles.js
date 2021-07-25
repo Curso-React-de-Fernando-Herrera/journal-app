@@ -3,12 +3,18 @@ import { colors } from 'styles/variables/colors'
 
 export const JournalBox = styled.div`
   display: flex;
-  background-color: ${ colors.lightTransparent };
+  background-color: ${colors.lightTransparent};
   box-sizing: border-box;
   padding: 1rem;
-  margin: .5rem;
+  margin: 0.5rem;
   border-radius: 30px;
   position: relative;
+  min-width: 280px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${colors.shadow};
+  }
 `
 
 export const InformationContent = styled.div`
@@ -17,9 +23,9 @@ export const InformationContent = styled.div`
 
 export const Title = styled.h2`
   font-weight: 400;
-  margin: 0 .25rem;
+  margin: 0 0.25rem;
   font-size: 16px;
-  color: ${ colors.white }
+  color: ${colors.white};
 `
 
 export const JournalContent = styled.p`
@@ -27,7 +33,7 @@ export const JournalContent = styled.p`
   font-weight: 400;
   font-size: 14px;
   margin: 0;
-  color: ${ colors.white };
+  color: ${colors.white};
   max-height: 4rem;
   overflow: hidden;
 `
@@ -39,9 +45,9 @@ export const DayContent = styled.div`
   height: 80px;
   width: 80px;
   box-sizing: border-box;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 15px;
-  background-color: ${ colors.lightTransparent };
+  background-color: ${colors.lightTransparent};
   right: -2rem;
 `
 

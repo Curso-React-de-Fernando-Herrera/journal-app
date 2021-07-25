@@ -21,10 +21,10 @@ export const journalAdd = () => {
   }
 }
 
-const journalActive = (uid, newJornal) => ({
+export const journalActive = (id, newJornal) => ({
   type: journalTypes.journalActive,
   payload: {
-    uid,
+    id,
     ...newJornal,
   },
 })
