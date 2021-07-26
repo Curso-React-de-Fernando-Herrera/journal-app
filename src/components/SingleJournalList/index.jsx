@@ -40,7 +40,7 @@ SingleJournalList.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string,
   body: PropTypes.string,
-  date: PropTypes.number.isRequired,
+  date: PropTypes.number,
 }
 
 export default SingleJournalList

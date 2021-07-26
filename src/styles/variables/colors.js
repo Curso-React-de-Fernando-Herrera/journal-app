@@ -7,4 +7,6 @@ export const colors = {
   gradient: 'var(--gradient)',
 
   error: '#f8d7da',
+  warning: '#fff3cd',
+  succes: '#d1e7dd',
 }
