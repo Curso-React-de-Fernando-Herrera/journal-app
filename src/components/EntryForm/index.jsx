@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { useForm } from 'hooks/useForm'
 import { journalUpdate } from 'actions/journal'
+import { colors } from 'styles/variables/colors'
 
 import ModalError from 'components/GlobalError'
 
@@ -42,7 +43,7 @@ const EntryForm = ({ content }) => {
         </FormContent>
       </Content>
       {
-        showMessage && <ModalError errorMessage="Mensaje guardado!" removeMessage={setShowMessage} />
+        showMessage && <ModalError errorMessage="Mensaje guardado! 😁" removeMessage={setShowMessage} colorMessage={colors.succes} />
       }
     </>
   )

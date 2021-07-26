@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { colors } from 'styles/variables/colors'
 
+import { ModalContainer, ModalText } from './styles'
+
 const GlobalError = ({ errorMessage = "", colorMessage = `${colors.warning}`, removeMessage }) => {
   const [showMessage, setShowMessage] = useState(true)
 
@@ -18,9 +20,9 @@ const GlobalError = ({ errorMessage = "", colorMessage = `${colors.warning}`, re
       {
         showMessage
           ? (
-            <div>
-              <p>{errorMessage}</p>
-            </div>
+            <ModalContainer colorMessage={colorMessage}>
+              <ModalText>{errorMessage}</ModalText>
+            </ModalContainer>
           )
           : null
       }
