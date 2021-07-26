@@ -1,8 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { useForm } from 'hooks/useForm'
 import { Content, FormContent, TitleInput, TextAreaInput } from './styles'
+import { journalUpdate } from 'actions/journal'
 
 const EntryForm = ({ content }) => {
+  const dispatch = useDispatch()
+
   const initialState = useMemo(() => ({
     title: content.title,
     body: content.body
@@ -18,6 +23,7 @@ const EntryForm = ({ content }) => {
 
   const handleCreate = e => {
     e.preventDefault()
+    dispatch(journalUpdate({ ...inputStates, id: content.id }))
   }
 
   return (

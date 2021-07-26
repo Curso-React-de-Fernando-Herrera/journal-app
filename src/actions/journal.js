@@ -14,8 +14,10 @@ export const journalAdd = () => {
 
     db.collection(`${uid}/journal/note`)
       .add(newJournal)
-      .then(() => {
-        dispatch(journalActive(uid, newJournal))
+      .then((data) => {
+        console.log({ data })
+        dispatch(journalActive(data.id, newJournal))
+        dispatch(startLoadingNotes(uid))
       })
       .catch(console.log)
   }
@@ -33,6 +35,23 @@ export const startLoadingNotes = (uid) => {
   return async (dispatch) => {
     const { notes } = await loadJournals(uid)
     dispatch(journalLoad({ notes }))
+  }
+}
+
+export const journalUpdate = (journal) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth
+    db.doc(`${uid}/journal/note/${journal.id}`).update(journal)
+    dispatch(updateJournals(journal))
+  }
+}
+
+export const updateJournals = (journal) => {
+  return {
+    type: journalTypes.journalUpdated,
+    payload: {
+      ...journal,
+    },
   }
 }
 

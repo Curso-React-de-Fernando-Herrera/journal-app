@@ -24,7 +24,19 @@ export const journalReducer = (state = initialState, action) => {
     case journalTypes.journalActive:
       return {
         ...state,
-        active: { ...payload }
+        active: { title: "", body: "", ...payload }
+      }
+
+    case journalTypes.journalUpdated:
+      const { journals } = state
+      const newJournals = journals.map((journal) => journal.id === payload.id
+        ? payload
+        : journal
+      )
+
+      return {
+        ...state,
+        journals: newJournals
       }
 
     default:

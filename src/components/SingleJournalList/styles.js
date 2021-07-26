@@ -12,8 +12,10 @@ export const JournalBox = styled.div`
   min-width: 280px;
   cursor: pointer;
 
-  :hover {
+  :hover,
+  :hover > div:last-child {
     background-color: ${colors.shadow};
+    color: ${colors.white};
   }
 `
 

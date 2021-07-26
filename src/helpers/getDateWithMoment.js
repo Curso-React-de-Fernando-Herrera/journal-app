@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 moment.updateLocale('en', {
-  weekdaysShort: ['Lun.', 'Mar.', 'Mie.', 'Jue.', 'Vie.', 'Sab.', 'Dom.'],
+  weekdaysShort: ['Dom.', 'Lun.', 'Mar.', 'Mie.', 'Jue.', 'Vie.', 'Sab.'],
 })
 
 export const handleGetDate = (date) => {
