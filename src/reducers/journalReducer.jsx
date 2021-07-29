@@ -5,8 +5,7 @@ const initialState = {
   active: null
 }
 
-export const journalReducer = (state = initialState, action) => {
-  const { type, payload } = action
+export const journalReducer = (state = initialState, { type, payload }) => {
 
   switch (type) {
 
@@ -24,7 +23,7 @@ export const journalReducer = (state = initialState, action) => {
     case journalTypes.journalActive:
       return {
         ...state,
-        active: { title: "", body: "", ...payload }
+        active: { title: "", body: "", imgUrl: "", ...payload }
       }
 
     case journalTypes.journalUpdated:
