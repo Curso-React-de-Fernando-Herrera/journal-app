@@ -6,7 +6,7 @@ import { journalActive } from 'actions/journal'
 import { handleGetDate } from 'helpers/getDateWithMoment'
 import { JournalBox, Title, JournalContent, DayContent, InformationContent, DayText, DayNumber } from './styles'
 
-const SingleJournalList = ({ id, title = "", body = "", date }) => {
+const SingleJournalList = ({ id, title = "", body = "", date, imgUrl = "" }) => {
   const dispatch = useDispatch()
 
   const { formatedDate } = handleGetDate(date)
@@ -17,11 +17,12 @@ const SingleJournalList = ({ id, title = "", body = "", date }) => {
       {
         title,
         body,
+        imgUrl,
         date
       }
     ))
   }
-
+  console.log(imgUrl)
   return (
     <JournalBox onClick={handleActive}>
       <InformationContent>
@@ -40,6 +41,7 @@ SingleJournalList.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string,
   body: PropTypes.string,
+  imgUrl: PropTypes.string,
   date: PropTypes.number,
 }
 

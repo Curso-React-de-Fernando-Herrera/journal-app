@@ -16,12 +16,13 @@ const ListOfJournals = () => {
   return (
     <BoxJournals>
       {
-        journals.map(({ id, title, body, date }) => <SingleJournalList
-          key={id}
-          id={id}
-          title={title}
+        journals.map(({ id, title, body, date, imgUrl }) => <SingleJournalList
           body={body}
           date={date}
+          id={id}
+          imgUrl={imgUrl}
+          key={id}
+          title={title}
         />
         )
       }

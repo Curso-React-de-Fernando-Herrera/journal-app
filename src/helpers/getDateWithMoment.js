@@ -1,8 +1,7 @@
 import moment from 'moment'
+import 'moment/locale/es'
 
-moment.updateLocale('en', {
-  weekdaysShort: ['Dom.', 'Lun.', 'Mar.', 'Mie.', 'Jue.', 'Vie.', 'Sab.'],
-})
+moment.locale('es')
 
 export const handleGetDate = (date) => {
   const formatedDate = moment(date)
