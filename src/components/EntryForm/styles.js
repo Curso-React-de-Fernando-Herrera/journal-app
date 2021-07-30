@@ -10,6 +10,7 @@ export const Content = styled.section`
 
 export const FormContent = styled.form`
   display: flex;
+  position: relative;
   flex-direction: column;
   height: 100%;
 `
@@ -64,4 +65,12 @@ export const DateText = styled.p`
   margin-top: 0;
   text-transform: capitalize;
   font-size: 18px;
+`
+
+export const Image = styled.img`
+  position: absolute;
+  max-width: 400px;
+  max-height: 200px;
+  right: 2rem;
+  transform: translateY(50%);
 `

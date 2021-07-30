@@ -9,7 +9,7 @@ import { JournalContainer } from './styles'
 
 const JournalPage = () => {
   const { active } = useSelector(state => state.journal)
-
+  console.log({ active })
   return (
     <JournalContainer>
       <LateralMenu />
