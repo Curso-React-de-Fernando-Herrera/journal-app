@@ -11,7 +11,19 @@ export const JournalBox = styled.div`
   position: relative;
   min-width: 280px;
   cursor: pointer;
-
+  ${({ isActive }) => {
+    if (isActive) {
+      return `
+        background-color: ${colors.shadow};
+        color: ${colors.white};
+        
+        & div:last-child {
+          background-color: ${colors.shadow};
+          color: ${colors.white};
+        }
+        `
+    }
+  }};
   :hover,
   :hover > div:last-child {
     background-color: ${colors.shadow};

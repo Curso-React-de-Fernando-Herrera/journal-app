@@ -1,5 +1,5 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { journalActive } from 'actions/journal'
@@ -8,6 +8,9 @@ import { JournalBox, Title, JournalContent, DayContent, InformationContent, DayT
 
 const SingleJournalList = ({ id, title = "", body = "", date, imgUrl = "" }) => {
   const dispatch = useDispatch()
+  const { id: activeId } = useSelector(({ journal }) => journal.active) || ''
+
+  const [activeJournal, setActiveJournal] = useState(false)
 
   const { formatedDate } = handleGetDate(date)
 
@@ -22,9 +25,17 @@ const SingleJournalList = ({ id, title = "", body = "", date, imgUrl = "" }) => 
       }
     ))
   }
-  console.log(imgUrl)
+
+  useEffect(() => {
+    id === activeId && setActiveJournal(true)
+
+    return () => {
+      setActiveJournal(false)
+    }
+  }, [id, activeId])
+
   return (
-    <JournalBox onClick={handleActive}>
+    <JournalBox onClick={handleActive} isActive={activeJournal}>
       <InformationContent>
         <Title>{title}</Title>
         <JournalContent>{body}</JournalContent>
